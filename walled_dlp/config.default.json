@@ -1,0 +1,44 @@
+{
+  "marker": "WALLED_SENSITIVE",
+  "fuzzy_marker_regex": "W\\s?A\\s?L\\s?L\\s?E\\s?D[\\s_\\-.,:;~=]{0,3}S\\s?E\\s?N\\s?S\\s?I\\s?T\\s?I\\s?V\\s?E",
+
+  "proxy_host": "127.0.0.1",
+  "proxy_port": 8765,
+  "pac_port": 8766,
+
+  "sites": {
+    "chatgpt": {
+      "label": "ChatGPT",
+      "hosts": ["chatgpt.com", "chat.openai.com"],
+      "prompt_paths": ["^/backend-api/(f/)?conversation/?$"],
+      "response_selectors": ["[data-message-author-role=\"assistant\"]"]
+    },
+    "perplexity": {
+      "label": "Perplexity",
+      "hosts": ["www.perplexity.ai", "perplexity.ai"],
+      "prompt_paths": ["^/rest/sse/perplexity_ask", "^/rest/sse/", "^/socket\\.io/"],
+      "response_selectors": ["[id^=\"markdown-content\"]", "div.prose"]
+    }
+  },
+
+  "upload_hosts": [
+    "*.oaiusercontent.com",
+    "fileserviceuploadsperm.blob.core.windows.net",
+    "ppl-ai-file-upload.s3.amazonaws.com",
+    "ppl-ai-file-upload.s3.us-east-1.amazonaws.com"
+  ],
+
+  "secondary_action": "block_silently",
+
+  "color_responses": true,
+  "response_color": "#0a7d32",
+  "block_service_workers": true,
+
+  "dialog_timeout_seconds": 60,
+  "decision_cache_seconds": 180,
+  "max_inspect_bytes": 104857600,
+  "max_pdf_pages_ocr": 25,
+  "on_inspection_error": "ask",
+
+  "discovery_logging": false
+}

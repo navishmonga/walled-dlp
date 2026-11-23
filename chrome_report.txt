@@ -1,0 +1,56 @@
+===== Chrome processes / command-line flags =====
+89314 /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+89316 /Applications/Google Chrome.app/Contents/Frameworks/Google Chrome Framework.framework/Versions/157.0.8103.80/Helpers/chrome_crashpad_handler --monitor-self-annotation=ptype=crashpad-handler --database=/Users/navishmonga/Library/Application Support/Google/Chrome/Crashpad --url=https://clients2.google.com/cr/report --annotation=channel= --annotation=plat=OS X --annotation=prod=Chrome_Mac --ann
+
+===== proxy-related flags on ANY Chrome process =====
+
+===== Chrome version =====
+Google Chrome 157.0.8103.80 
+
+===== Profiles =====
+Default
+Profile 1
+Profile 2
+Profile 3
+
+===== Extensions with the 'proxy' permission (these override system proxy) =====
+--- Default  proxy pref: (none)
+--- Profile 1  proxy pref: (none)
+--- Profile 2  proxy pref: (none)
+--- Profile 3  proxy pref: (none)
+   eppiocemhmnlbhjplcgkofciiegomcon  Urban VPN Proxy  [ENABLED]  controls_proxy_now=True
+   pekcnopmdcbjdgmpnpkndppflpldnkkp  Hide My IP  [disabled]  controls_proxy_now=False
+   (on disk) pekcnopmdcbjdgmpnpkndppflpldnkkp  Hide My IP
+   (on disk) eppiocemhmnlbhjplcgkofciiegomcon  __MSG_appName__
+
+===== Managed Chrome policies (any) =====
+{
+    LastRunAppBundlePath = "/Applications/Google Chrome.app";
+    NSNavPanelExpandedSizeForOpenMode = "{800, 448}";
+    NSOSPLastRootDirectory = {length = 732, bytes = 0x626f6f6b dc020000 00000410 30000000 ... 7c010000 00000000 };
+    "NSWindow Frame NSNavPanelAutosaveName" = "320 165 800 448 0 0 1440 900 ";
+}
+
+===== OpenVPN state =====
+	inet 127.0.0.1 netmask 0xff000000
+	inet 127.94.0.1 netmask 0xff000000
+	inet 192.0.0.2 netmask 0xffffffff broadcast 192.0.0.2
+utun0: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1380
+utun1: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1500
+utun2: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 2000
+utun3: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1000
+Routing tables
+
+Internet:
+Destination        Gateway            Flags               Netif Expire
+default            192.0.0.1          UGScg                 en0       
+127                127.0.0.1          UCS                   lo0       
+127.0.0.1          127.0.0.1          UH                    lo0       
+127.94.0.1         127.94.0.1         UH                    lo0       
+192.0.0.1/32       link#11            UCS                   en0      !
+192.0.0.1          link#11            UHLWIir               en0      !
+192.0.0.2/32       link#11            UCS                   en0      !
+192.0.0.2          3a:c:45:b0:1c:c0   UHLWI                 lo0       
+224.0.0/4          link#11            UmCS                  en0      !
+224.0.0.251        1:0:5e:0:0:fb      UHmLWI                en0       
+255.255.255.255/32 link#11            UCS                   en0      !

@@ -1,0 +1,6 @@
+mitmproxy>=11,<13
+pypdf>=4.0
+pypdfium2>=4.20
+pillow>=10.1
+rumps>=0.4.0; sys_platform == "darwin"
+pyobjc-framework-Vision>=10.0; sys_platform == "darwin"

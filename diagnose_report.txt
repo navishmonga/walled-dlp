@@ -1,0 +1,179 @@
+
+===== date / macOS =====
+Mon Nov 23 22:17:30 IST 2026
+ProductName:		macOS
+ProductVersion:		15.5
+BuildVersion:		24F74
+
+===== python / venv =====
+.venv
+Python 3.13.7
+
+===== walled_dlp status =====
+WALLED DLP 0.1.0
+App data     : /Users/navishmonga/Library/Application Support/WalledDLP
+Logs         : /Users/navishmonga/Library/Logs/WalledDLP
+CA present   : True (54:0B:5F:F0:42:76:6F:43:40:F4:9C:B6:AD:33:97:46:8E:F6:49:4C:44:74:B7:83:04:C9:C6:04:46:80:E9:9A)
+Proxy running: True 127.0.0.1:8765
+PAC running  : True http://127.0.0.1:8766/proxy.pac
+Autostart    : False
+Target hosts : chatgpt.com, chat.openai.com, www.perplexity.ai, perplexity.ai, *.oaiusercontent.com, fileserviceuploadsperm.blob.core.windows.net, ppl-ai-file-upload.s3.amazonaws.com, ppl-ai-file-upload.s3.us-east-1.amazonaws.com
+
+===== processes =====
+navishmonga      88144   0.0  0.5 411795680  89264 s007  S+   10:11PM   0:01.76 /Library/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python -m walled_dlp run --discover
+
+===== listening ports 8765/8766 =====
+COMMAND   PID        USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Python  88144 navishmonga    7u  IPv4 0xbac7dffc3088eb14      0t0  TCP 127.0.0.1:8765 (LISTEN)
+Python  88144 navishmonga    9u  IPv4 0x79067acaf89024e4      0t0  TCP 127.0.0.1:8766 (LISTEN)
+
+===== PAC served =====
+// WALLED DLP - routes only AI-app traffic through the local DLP proxy
+function FindProxyForURL(url, host) {
+  host = host.toLowerCase();
+  if (host === "chatgpt.com"
+      || host === "chat.openai.com"
+      || host === "www.perplexity.ai"
+      || host === "perplexity.ai"
+      || host === "oaiusercontent.com" || dnsDomainIs(host, ".oaiusercontent.com")
+      || host === "fileserviceuploadsperm.blob.core.windows.net"
+      || host === "ppl-ai-file-upload.s3.amazonaws.com"
+      || host === "ppl-ai-file-upload.s3.us-east-1.amazonaws.com") {
+    return "PROXY 127.0.0.1:8765";
+
+===== EFFECTIVE system proxy (scutil --proxy) =====
+<dictionary> {
+  ExceptionsList : <array> {
+    0 : *.local
+    1 : 169.254/16
+  }
+  FTPPassive : 1
+  ProxyAutoConfigEnable : 1
+  ProxyAutoConfigURLString : http://127.0.0.1:8766/proxy.pac?v=1795452078
+}
+
+===== per-service proxy settings =====
+--- Thunderbolt Bridge
+URL: http://127.0.0.1:8766/proxy.pac?v=1795452078
+Enabled: Yes
+Enabled: No
+Server: 
+Port: 0
+Enabled: No
+Server: 
+Port: 0
+--- Wi-Fi
+URL: http://127.0.0.1:8766/proxy.pac?v=1795452078
+Enabled: Yes
+Enabled: No
+Server: 
+Port: 0
+Enabled: No
+Server: 
+Port: 0
+--- iPhone USB
+URL: http://127.0.0.1:8766/proxy.pac?v=1795452078
+Enabled: Yes
+Enabled: No
+Server: 
+Port: 0
+Enabled: No
+Server: 
+Port: 0
+
+===== network service order =====
+An asterisk (*) denotes that a network service is disabled.
+(1) Thunderbolt Bridge
+(Hardware Port: Thunderbolt Bridge, Device: bridge0)
+
+(2) Wi-Fi
+(Hardware Port: Wi-Fi, Device: en0)
+
+(3) iPhone USB
+(Hardware Port: iPhone USB, Device: en5)
+
+
+===== VPN / network extensions =====
+Available network connection services in the current set (*=enabled):
+
+===== security / VPN agents running =====
+/Applications/OpenVPN Connect/OpenVPN Connect.app/Contents/Frameworks/OpenVPN Connect Helper (GPU).app/Contents/MacOS/OpenVPN Connect Helper (GPU)
+/Applications/OpenVPN Connect/OpenVPN Connect.app/Contents/Frameworks/OpenVPN Connect Helper (Renderer).app/Contents/MacOS/OpenVPN Connect Helper (Renderer)
+/Applications/OpenVPN Connect/OpenVPN Connect.app/Contents/Frameworks/OpenVPN Connect Helper.app/Contents/MacOS/OpenVPN Connect Helper
+/Applications/OpenVPN Connect/OpenVPN Connect.app/Contents/MacOS/OpenVPN Connect
+/Applications/OpenVPN/OpenVPN Connect.app/Contents/MacOS/OpenVPNConnect
+/Library/Frameworks/OpenVPN.framework/Versions/Current/bin/openvpn-service
+/Library/Frameworks/OpenVPNConnect.framework/Versions/Current/usr/sbin/ovpnagent
+/System/Library/PrivateFrameworks/SiriTTSService.framework/Versions/A/XPCServices/com.apple.SiriTTSService.TrialProxy.xpc/Contents/MacOS/com.apple.SiriTTSService.TrialProxy
+/usr/libexec/networkserviceproxy
+
+===== MDM enrollment =====
+Enrolled via DEP: No
+MDM enrollment: No
+
+===== Chrome managed policy (proxy-related) =====
+no user-level Chrome proxy policy
+
+===== CA in login keychain =====
+SHA-256 hash: 540B5FF042766F4340F49CB6AD3397468EF6494C4474B78304C9C6044680E99A
+    "alis"<blob>="WALLED DLP Local CA (MBPR-M1-006.local)"
+    "labl"<blob>="WALLED DLP Local CA (MBPR-M1-006.local)"
+Cert 0: WALLED DLP Local CA (MBPR-M1-006.local)
+   Number of trust settings : 1
+   Trust Setting 0:
+      Policy OID            : SSL
+
+===== direct test THROUGH the proxy to chatgpt.com =====
+< HTTP/1.1 200 Connection established
+*  subject: CN=chatgpt.com
+*  issuer: CN=WALLED DLP Local CA (MBPR-M1-006.local); O=WALLED DLP
+*  SSL certificate verify ok.
+< HTTP/2 200 
+http_code=200 ssl_verify=0
+
+===== app log (last 60 lines) =====
+2026-11-23 22:00:19,262 INFO walled_dlp: DLP proxy listening on 127.0.0.1:8765
+2026-11-23 22:00:19,266 INFO walled_dlp.proxy: Setting system auto-proxy (PAC) to http://127.0.0.1:8766/proxy.pac?v=1795451419
+2026-11-23 22:00:25,874 INFO walled_dlp: WALLED DLP 0.1.0 active. Audit log: /Users/navishmonga/Library/Logs/WalledDLP/audit.jsonl
+2026-11-23 22:11:18,205 INFO walled_dlp: DLP proxy listening on 127.0.0.1:8765
+2026-11-23 22:11:18,210 INFO walled_dlp.proxy: Setting system auto-proxy (PAC) to http://127.0.0.1:8766/proxy.pac?v=1795452078
+2026-11-23 22:11:23,974 INFO walled_dlp: WALLED DLP 0.1.0 active. Audit log: /Users/navishmonga/Library/Logs/WalledDLP/audit.jsonl
+2026-11-23 22:11:36,739 INFO walled_dlp: DISCOVER GET chatgpt.com/ ct= len=0
+2026-11-23 22:11:37,771 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/8c892297a50f.css ct= len=0
+2026-11-23 22:11:37,803 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/manifest-b54dc8ca.js ct= len=0
+2026-11-23 22:11:37,803 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/685809.060daa72a1.js ct= len=0
+2026-11-23 22:11:37,803 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/633146.1f27f5a9c8.js ct= len=0
+2026-11-23 22:11:37,804 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/680612.8d24b5fbe1.js ct= len=0
+2026-11-23 22:11:37,804 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/418851.05e747fff0.js ct= len=0
+2026-11-23 22:11:37,804 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/109308.d24e70db04.js ct= len=0
+2026-11-23 22:11:37,805 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/399565.bde4033eb2.js ct= len=0
+2026-11-23 22:11:37,805 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/257798.0095cbe700.js ct= len=0
+2026-11-23 22:11:37,805 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/447351.05632d2214.js ct= len=0
+2026-11-23 22:11:37,806 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/617936.75afa06ed2.js ct= len=0
+2026-11-23 22:11:37,859 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/807489.5142370709.js ct= len=0
+2026-11-23 22:11:37,859 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/337882.abb4bc92fd.js ct= len=0
+2026-11-23 22:11:37,860 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/955979.54c13b0fc4.js ct= len=0
+2026-11-23 22:11:37,860 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/646436.e4ed460833.js ct= len=0
+2026-11-23 22:11:37,860 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/7078.61922297fe.js ct= len=0
+2026-11-23 22:11:37,860 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/200429.e860765fad.js ct= len=0
+2026-11-23 22:11:37,861 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/698524.4f94b9b043.js ct= len=0
+2026-11-23 22:11:37,861 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/956483.afc3e2c9fd.js ct= len=0
+2026-11-23 22:11:37,861 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/87162.e84f1cbe30.js ct= len=0
+2026-11-23 22:11:37,861 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/396705.16d73232e5.js ct= len=0
+2026-11-23 22:11:37,862 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/155568.18f2193ead.js ct= len=0
+2026-11-23 22:11:37,914 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/731863.b14c3a25df.js ct= len=0
+2026-11-23 22:11:37,914 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/767086.d600a395f4.js ct= len=0
+2026-11-23 22:11:37,915 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/76629.2b5e8e87e6.js ct= len=0
+2026-11-23 22:11:37,915 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/226913.748570e15f.js ct= len=0
+2026-11-23 22:11:37,915 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/736644.066aa4e4cb.js ct= len=0
+2026-11-23 22:11:37,915 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/538990.aed7f92f04.js ct= len=0
+2026-11-23 22:11:37,915 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/227786.952cdb546b.js ct= len=0
+2026-11-23 22:11:37,916 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/687836.80279e5b21.js ct= len=0
+2026-11-23 22:11:37,916 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/42763.819c72b22d.js ct= len=0
+2026-11-23 22:11:37,916 INFO walled_dlp: DISCOVER GET chatgpt.com/cdn/assets/906348.5c7af74a90.js ct= len=0
+2026-11-23 22:17:31,503 INFO walled_dlp: DISCOVER GET chatgpt.com/ ct= len=0
+
+===== launchd logs =====
+
+===== audit log (last 10) =====
+tail: /Users/navishmonga/Library/Logs/WalledDLP/audit.jsonl: No such file or directory
